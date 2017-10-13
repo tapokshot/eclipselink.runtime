@@ -458,16 +458,7 @@ public class SchemaManager {
      * Check if the table exists by issuing a select.
      */
     public boolean checkTableExists(TableDefinition table) {
-        String column = null;
-        for (FieldDefinition field : table.getFields()) {
-            if (column == null) {
-                column = field.getName();
-            } else if (field.isPrimaryKey()) {
-                column = field.getName();
-                break;
-            }
-        }
-        String sql = "SELECT " + column + " FROM " + table.getFullName() + " WHERE " + column + " <> " + column;
+        String sql = "SELECT * FROM " + table.getFullName() + " WHERE 1 <> 1";
         DataReadQuery query = new DataReadQuery(sql);
         query.setMaxRows(1);
         boolean loggingOff = session.isLoggingOff();
